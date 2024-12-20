@@ -23,7 +23,7 @@ The purpose of this project is to practice building a RESTful API using Go and m
 
 ## Screenshot
 
-![Main Page Screenshot](https://github.com/1ncogn1to0/KinoTime/blob/main/advprg.jpg)  
+![Main Page Screenshot](https://github.com/1ncogn1to0/KinoTime/blob/main/page.jpg)  
 
 ## Project Setup and Installation
 
