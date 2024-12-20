@@ -1,0 +1,284 @@
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+body {
+    background-image: url('https://i.pinimg.com/originals/e2/3f/a6/e23fa65dcedeb00cc5f9ac4ca015699d.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Дополнительные стили для кнопок */
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: opacity 0.3s; /* Smooth transition for buttons */
+    font-size: 16px; /* Consistent font size */
+}
+
+button:hover {
+    opacity: 0.8; /* Уменьшение непрозрачности при наведении */
+}
+
+hr {
+    width: 25%;
+    margin: 10px auto;
+    border: 2px solid white !important;
+}
+
+.main-content {
+    text-align: center;
+    margin-top: 50px; /* Уменьшено для лучшего расположения */
+}
+
+
+.text-center {
+    text-align: center;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+nav{
+    display: flex;
+    width: 100%;
+    margin: auto;
+    padding: 20px 0;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #555;
+}
+
+nav ul li{
+    display: inline-block;
+    list-style: none;
+    margin: 10px 20px;
+}
+nav ul li a{
+    text-decoration: none;
+    color:#fff;
+    font-weight: bold;
+}
+
+.main-content {
+    text-align: center;
+    margin-top: 350px;
+    margin-bottom: 450px;
+}
+
+hr {
+    width: 25%;
+    margin: 10px auto;
+    border: 2px solid white !important;
+}
+
+.main-content h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.section-heading {
+    text-align: left;
+    margin: 30px;
+    /*color: #fff;*/
+}
+
+
+.card-img-top {
+    height: 500px; /* Adjust height as needed */
+    object-fit: cover; /* Ensures images fill the area without stretching */
+}
+
+
+.highlighted-movies .movie-card {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.highlighted-movies .movie-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+}
+
+.movie-title {
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.movie-description {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.details-link {
+    color: #76a5af;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.details-link:hover {
+    color: #ffcccb;
+    text-decoration: underline;
+}
+
+
+
+.movie-gallery, .actors-gallery, .show-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.movie-card, .actor-card, .show-card {
+    flex: 1 1 calc(20% - 15px);
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.movie-card img, .actor-card img, .show-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.movie-title, .actor-name, .show-title {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #333;
+}
+
+#movieContainer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+input {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+    margin-right: 10px;
+}
+
+
+#movieInfo {
+    margin-top: 20px;
+}
+
+.quote {
+    font-style: italic;
+    margin: 20px auto;
+    padding: 10px;
+    max-width: 600px;
+    border-left: 3px solid #ccc;
+    /*color:#fff;*/
+}
+
+
+@media (max-width: 768px) {
+    .movie-card, .actor-card, .show-card {
+        flex: 1 1 calc(45% - 10px);
+    }
+}
+
+@media (max-width: 480px) {
+    .movie-card, .actor-card, .show-card {
+        flex: 1 1 100%;
+    }
+}
+
+
+footer {
+    background-color: #eff4fd;
+    color: #111;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 0;
+}
+
+.footer-content {
+    margin-bottom: 10px;
+}
+
+.footer-content p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.footer-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-content ul li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.footer-content ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-content ul li a:hover {
+    text-decoration: underline;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+}
+
+.card-img-top {
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card-body {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.night-theme{
+    color: #000000 ; /* Цвет текста для ночной темы - white */
+    font-family: 'Times New Roman', Times, serif;
+    background-image: url(https://img.freepik.com/free-vector/white-abstract-background-in-paper-style_23-2148397044.jpg?w=1060&t=st=1729441793~exp=1729442393~hmac=3afe0a9125f49e3a69e6b5e0dfd365809a06dace062d5934cfa760f5e919cbc3); /* Убираем изображение фона в ночной теме */
+
+}
+
+.night-theme .main-content{
+    background-image: none;
+}
+
+.day-theme {
+    color: white; /* Цвет текста для дневной темы - black */
+    font-family: 'Arial', sans-serif; /* Шрифт для дневной темы */
+}
+
+
