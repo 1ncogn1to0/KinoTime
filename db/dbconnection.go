@@ -25,3 +25,17 @@ func NewDb() {
 	DB = db
 	fmt.Println("Database connected successfully!")
 }
+
+func CloseDb() {
+	sqlDB, err := DB.DB()
+	if err != nil {
+		log.Println("Error retrieving sql.DB from Gorm:", err)
+		return
+	}
+
+	if err := sqlDB.Close(); err != nil {
+		log.Println("Error closing the database connection:", err)
+	} else {
+		fmt.Println("Database connection closed successfully.")
+	}
+}

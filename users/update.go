@@ -2,9 +2,11 @@ package users
 
 import (
 	"PracticeServer/db"
+	"PracticeServer/logging"
 	"PracticeServer/models"
 	"encoding/json"
 	"github.com/gorilla/mux"
+	"go.uber.org/zap"
 	"net/http"
 )
 
@@ -43,10 +45,12 @@ func UpdateUsers(w http.ResponseWriter, r *http.Request) {
 	tx = db.DB.Updates(&user)
 	if tx.Error != nil {
 		w.WriteHeader(http.StatusInternalServerError)
+		logging.Logger.Error("Failed to update user:", zap.Error(tx.Error))
 		response := Response{Status: "fail", Message: "Failed to update user: " + tx.Error.Error()}
 		json.NewEncoder(w).Encode(response)
 		return
 	}
+	logging.Logger.Info("User updated successfully", zap.String("func", "UpdateUsers"))
 	response := Response{Status: "success", Message: "User updated successfully"}
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(response)
