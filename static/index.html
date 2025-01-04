@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form {
+            margin-bottom: 20px;
+        }
+        .form label {
+            display: block;
+            margin: 5px 0;
+        }
+        .form input, .form select {
+            padding: 8px;
+            width: 300px;
+            margin-bottom: 10px;
+        }
+        .form button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form button:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .delete-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+<h1>User Management</h1>
+
+<!-- Create User Form -->
+<div class="form">
+    <h2>Create User</h2>
+    <label for="create-name">Name</label>
+    <input type="text" id="create-name" placeholder="Enter name">
+    <label for="create-email">Email</label>
+    <input type="email" id="create-email" placeholder="Enter email">
+    <button onclick="createUser()">Create</button>
+</div>
+
+<!-- Update User Form -->
+<div class="form">
+    <h2>Update User</h2>
+    <label for="update-id">User ID</label>
+    <input type="text" id="update-id" placeholder="Enter user ID">
+    <label for="update-name">Name</label>
+    <input type="text" id="update-name" placeholder="Enter new name">
+    <label for="update-email">Email</label>
+    <input type="email" id="update-email" placeholder="Enter new email">
+    <button onclick="updateUser()">Update</button>
+</div>
+
+<!-- Filter, Sort, and Pagination Form -->
+<div class="form">
+    <h2>Search and Sort Users</h2>
+    <label for="filter">Filter by Name</label>
+    <input type="text" id="filter" name="filter" placeholder="Enter name">
+
+    <label for="sort">Sort By</label>
+    <select id="sort" name="sort">
+        <option value="name">Name</option>
+        <option value="email">Email</option>
+        <option value="created_at">Created At</option>
+    </select>
+
+    <label for="page">Page</label>
+    <input type="number" id="page" name="page" min="1" value="1">
+
+    <button onclick="applyFilters()">Apply</button>
+</div>
+
+<!-- User List -->
+<h2>All Users</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody id="user-list"></tbody>
+</table>
+
+<h2>Get by ID</h2>
+<div class="form">
+    <label for="id">User ID</label>
+    <input type="text" id="id" placeholder="Enter user ID">
+    <button onclick="getUser()">GET</button>
+</div>
+<div class="get-by-id"></div>
+
+<script>
+    async function fetchUsers(filter = '', sort = '', page = 1) {
+        try {
+            const url = new URL('/users', window.location.origin);
+            if (filter) url.searchParams.append('filter', filter);
+            if (sort) url.searchParams.append('sort', sort);
+            url.searchParams.append('page', page);
+
+            const response = await fetch(url);
+            if (!response.ok) {
+                console.error('Failed to fetch users. Status:', response.status);
+                alert('Failed to fetch users.');
+                return;
+            }
+
+            const data = await response.json();
+            console.log('Data received:', data);
+
+            const userList = document.getElementById('user-list');
+            userList.innerHTML = '';
+
+            if (data.data && data.data.length > 0) {
+                data.data.forEach(user => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${user.id}</td>
+                        <td>${user.name}</td>
+                        <td>${user.email}</td>
+                        <td>
+                            <button class="delete-button" onclick="deleteUser(${user.id})">Delete</button>
+                        </td>
+                    `;
+                    userList.appendChild(row);
+                });
+            } else {
+                userList.innerHTML = '<tr><td colspan="4">No users found.</td></tr>';
+            }
+        } catch (error) {
+            console.error('Error fetching users:', error);
+            alert('An error occurred while fetching users.');
+        }
+    }
+
+    async function createUser() {
+        const name = document.getElementById('create-name').value;
+        const email = document.getElementById('create-email').value;
+
+        const response = await fetch('/users', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email }),
+        });
+
+        if (response.ok) {
+            alert('User created successfully!');
+            fetchUsers(); // Обновляем таблицу сразу
+        } else {
+            const errorText = await response.text();
+            alert(`Failed to create user: ${errorText}`);
+        }
+    }
+
+    async function updateUser() {
+        const id = document.getElementById('update-id').value;
+        const name = document.getElementById('update-name').value;
+        const email = document.getElementById('update-email').value;
+
+        const response = await fetch(`/users/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email }),
+        });
+
+        if (response.ok) {
+            alert('User updated successfully!');
+            fetchUsers(); // Обновляем таблицу сразу
+        } else {
+            const errorText = await response.text();
+            alert(`Failed to update user: ${errorText}`);
+        }
+    }
+
+    async function deleteUser(id) {
+        const response = await fetch(`/users/${id}`, {
+            method: 'DELETE',
+        });
+
+        if (response.ok) {
+            alert('User deleted successfully!');
+            fetchUsers(); // Обновляем таблицу сразу
+        } else {
+            const errorText = await response.text();
+            alert(`Failed to delete user: ${errorText}`);
+        }
+    }
+
+    function applyFilters() {
+        const filter = document.getElementById('filter').value;
+        const sort = document.getElementById('sort').value;
+        const page = document.getElementById('page').value;
+
+        fetchUsers(filter, sort, page);
+    }
+
+    async function getUser() {
+        const id = document.getElementById('id').value;
+
+        if (!id) {
+            alert('Please enter a valid User ID.');
+            return;
+        }
+
+        const response = await fetch(`/users/${id}`, {
+            method: 'GET',
+        });
+
+        if (!response.ok) {
+            alert('Failed to get user.');
+            return;
+        }
+
+        const data = await response.json();
+
+        if (data && data.data) {
+            const user = data.data;
+
+            const userInfo = document.querySelector('.get-by-id');
+            userInfo.innerHTML = `
+            <p><strong>ID:</strong> ${user.id}</p>
+            <p><strong>Name:</strong> ${user.name}</p>
+            <p><strong>Email:</strong> ${user.email}</p>
+        `;
+        } else {
+            alert('User not found.');
+        }
+    }
+
+    // Initial load
+    window.onload = () => {
+        fetchUsers();
+    };
+</script>
+</body>
+</html>
