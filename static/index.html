@@ -9,27 +9,12 @@
             font-family: Arial, sans-serif;
             margin: 20px;
         }
-        .form {
+        .form, .pagination, .error {
             margin-bottom: 20px;
         }
-        .form label {
+        .form label, .form input, .form select, .form button {
             display: block;
             margin: 5px 0;
-        }
-        .form input, .form select {
-            padding: 8px;
-            width: 300px;
-            margin-bottom: 10px;
-        }
-        .form button {
-            padding: 10px 15px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .form button:hover {
-            background-color: #218838;
         }
         table {
             width: 100%;
@@ -42,20 +27,31 @@
             padding: 10px;
             text-align: left;
         }
-        .delete-button {
+        .delete-button, .update-button {
             background-color: #dc3545;
             color: white;
             border: none;
             padding: 5px 10px;
             cursor: pointer;
         }
+        .update-button {
+            background-color: #007bff;
+        }
         .delete-button:hover {
             background-color: #c82333;
+        }
+        .update-button:hover {
+            background-color: #0056b3;
+        }
+        .pagination button {
+            margin: 5px;
         }
     </style>
 </head>
 <body>
 <h1>User Management</h1>
+
+<div class="error" id="error-message"></div>
 
 <!-- Create User Form -->
 <div class="form">
@@ -79,23 +75,31 @@
     <button onclick="updateUser()">Update</button>
 </div>
 
-<!-- Filter, Sort, and Pagination Form -->
+<!-- Get User by ID -->
+<div class="form">
+    <h2>Get User by ID</h2>
+    <label for="get-id">User ID</label>
+    <input type="text" id="get-id" placeholder="Enter user ID">
+    <button onclick="getUserById()">Get User</button>
+    <div id="user-details"></div>
+</div>
+
+<!-- Filter, Sort, and Pagination -->
 <div class="form">
     <h2>Search and Sort Users</h2>
-    <label for="filter">Filter by Name</label>
-    <input type="text" id="filter" name="filter" placeholder="Enter name">
-
-    <label for="sort">Sort By</label>
-    <select id="sort" name="sort">
+    <label for="filter-name">Filter by Name</label>
+    <input type="text" id="filter-name" placeholder="Enter name">
+    <label for="sort-field">Sort By</label>
+    <select id="sort-field">
         <option value="name">Name</option>
         <option value="email">Email</option>
-        <option value="created_at">Created At</option>
     </select>
-
-    <label for="page">Page</label>
-    <input type="number" id="page" name="page" min="1" value="1">
-
-    <button onclick="applyFilters()">Apply</button>
+    <label for="sort-order">Order</label>
+    <select id="sort-order">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+    </select>
+    <button onclick="applyFilters()">Apply Filters</button>
 </div>
 
 <!-- User List -->
@@ -112,73 +116,132 @@
     <tbody id="user-list"></tbody>
 </table>
 
-<h2>Get by ID</h2>
-<div class="form">
-    <label for="id">User ID</label>
-    <input type="text" id="id" placeholder="Enter user ID">
-    <button onclick="getUser()">GET</button>
+<!-- Pagination -->
+<div class="pagination">
+    <button id="prev-page" onclick="prevPage()" disabled>Previous</button>
+    <span id="current-page">1</span>
+    <button id="next-page" onclick="nextPage()">Next</button>
 </div>
-<div class="get-by-id"></div>
 
 <script>
-    async function fetchUsers(filter = '', sort = '', page = 1) {
-        try {
-            const url = new URL('/users', window.location.origin);
-            if (filter) url.searchParams.append('filter', filter);
-            if (sort) url.searchParams.append('sort', sort);
-            url.searchParams.append('page', page);
+    let currentPage = 1; // Текущая страница
+    const limit = 2;    // Количество пользователей на странице
+    let allUsers = []; // Все пользователи, загруженные с сервера
 
-            const response = await fetch(url);
-            if (!response.ok) {
-                console.error('Failed to fetch users. Status:', response.status);
-                alert('Failed to fetch users.');
-                return;
-            }
+    async function fetchUsers() {
+        const filterName = document.getElementById('filter-name').value;
+        const sortField = document.getElementById('sort-field').value;
+        const sortOrder = document.getElementById('sort-order').value;
+
+        try {
+            // Формируем URL для запроса к API
+            const response = await fetch(`/users?name=${filterName}&sort=${sortField}&order=${sortOrder}`);
+            if (!response.ok) throw new Error('Failed to fetch users.');
 
             const data = await response.json();
-            console.log('Data received:', data);
 
-            const userList = document.getElementById('user-list');
-            userList.innerHTML = '';
+            // Сохраняем всех пользователей в allUsers
+            allUsers = data.data || [];
 
-            if (data.data && data.data.length > 0) {
-                data.data.forEach(user => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${user.id}</td>
-                        <td>${user.name}</td>
-                        <td>${user.email}</td>
-                        <td>
-                            <button class="delete-button" onclick="deleteUser(${user.id})">Delete</button>
-                        </td>
-                    `;
-                    userList.appendChild(row);
-                });
-            } else {
-                userList.innerHTML = '<tr><td colspan="4">No users found.</td></tr>';
-            }
+            // Отображаем первую страницу
+            displayPage(currentPage);
+
+            // Обновляем состояние кнопок пагинации
+            updatePaginationButtons();
         } catch (error) {
-            console.error('Error fetching users:', error);
-            alert('An error occurred while fetching users.');
+            displayError(error.message);
         }
+    }
+
+    function displayPage(page) {
+        const userList = document.getElementById('user-list');
+        userList.innerHTML = '';
+
+        // Вычисляем начальный и конечный индексы для отображения
+        const startIndex = (page - 1) * limit;
+        const endIndex = startIndex + limit;
+        const usersToDisplay = allUsers.slice(startIndex, endIndex);
+
+        if (usersToDisplay.length === 0) {
+            userList.innerHTML = '<tr><td colspan="4">No users found.</td></tr>';
+            return;
+        }
+
+        usersToDisplay.forEach(user => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>
+                        <button class="delete-button" onclick="deleteUser(${user.id})">Delete</button>
+                        <button class="update-button" onclick="populateUpdateForm(${user.id}, '${user.name}', '${user.email}')">Update</button>
+                    </td>
+                `;
+            userList.appendChild(row);
+        });
+    }
+
+    function updatePaginationButtons() {
+        const prevButton = document.getElementById('prev-page');
+        const nextButton = document.getElementById('next-page');
+
+        prevButton.disabled = currentPage <= 1;
+        nextButton.disabled = currentPage >= Math.ceil(allUsers.length / limit);
+
+        document.getElementById('current-page').textContent = currentPage;
+    }
+
+    function prevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            displayPage(currentPage);
+            updatePaginationButtons();
+        }
+    }
+
+    function nextPage() {
+        if (currentPage < Math.ceil(allUsers.length / limit)) {
+            currentPage++;
+            displayPage(currentPage);
+            updatePaginationButtons();
+        }
+    }
+
+    function applyFilters() {
+        currentPage = 1;
+        fetchUsers();
     }
 
     async function createUser() {
         const name = document.getElementById('create-name').value;
         const email = document.getElementById('create-email').value;
 
-        const response = await fetch('/users', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email }),
-        });
+        try {
+            const response = await fetch('/users', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email })
+            });
 
-        if (response.ok) {
+            if (!response.ok) throw new Error('Failed to create user.');
+
             alert('User created successfully!');
-            fetchUsers(); // Обновляем таблицу сразу
-        } else {
-            const errorText = await response.text();
-            alert(`Failed to create user: ${errorText}`);
+            fetchUsers();
+        } catch (error) {
+            displayError(error.message);
+        }
+    }
+
+    async function deleteUser(id) {
+        try {
+            const response = await fetch(`/users/${id}`, { method: 'DELETE' });
+            if (!response.ok) throw new Error('Failed to delete user.');
+
+            alert('User deleted successfully!');
+            fetchUsers();
+        } catch (error) {
+            displayError(error.message);
         }
     }
 
@@ -187,80 +250,61 @@
         const name = document.getElementById('update-name').value;
         const email = document.getElementById('update-email').value;
 
-        const response = await fetch(`/users/${id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email }),
-        });
+        try {
+            const response = await fetch(`/users/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email })
+            });
 
-        if (response.ok) {
+            if (!response.ok) throw new Error('Failed to update user.');
+
             alert('User updated successfully!');
-            fetchUsers(); // Обновляем таблицу сразу
-        } else {
-            const errorText = await response.text();
-            alert(`Failed to update user: ${errorText}`);
+            fetchUsers();
+        } catch (error) {
+            displayError(error.message);
         }
     }
 
-    async function deleteUser(id) {
-        const response = await fetch(`/users/${id}`, {
-            method: 'DELETE',
-        });
+    async function getUserById() {
+        const id = document.getElementById('get-id').value;
 
-        if (response.ok) {
-            alert('User deleted successfully!');
-            fetchUsers(); // Обновляем таблицу сразу
-        } else {
-            const errorText = await response.text();
-            alert(`Failed to delete user: ${errorText}`);
-        }
-    }
+        try {
+            const response = await fetch(`/users/${id}`);
+            if (!response.ok) throw new Error('Failed to get user.');
 
-    function applyFilters() {
-        const filter = document.getElementById('filter').value;
-        const sort = document.getElementById('sort').value;
-        const page = document.getElementById('page').value;
+            const data = await response.json();
 
-        fetchUsers(filter, sort, page);
-    }
-
-    async function getUser() {
-        const id = document.getElementById('id').value;
-
-        if (!id) {
-            alert('Please enter a valid User ID.');
-            return;
-        }
-
-        const response = await fetch(`/users/${id}`, {
-            method: 'GET',
-        });
-
-        if (!response.ok) {
-            alert('Failed to get user.');
-            return;
-        }
-
-        const data = await response.json();
-
-        if (data && data.data) {
             const user = data.data;
-
-            const userInfo = document.querySelector('.get-by-id');
-            userInfo.innerHTML = `
-            <p><strong>ID:</strong> ${user.id}</p>
-            <p><strong>Name:</strong> ${user.name}</p>
-            <p><strong>Email:</strong> ${user.email}</p>
-        `;
-        } else {
-            alert('User not found.');
+            if (user) {
+                const userDetails = document.getElementById('user-details');
+                userDetails.innerHTML = `
+                    <p><strong>ID:</strong> ${user.id}</p>
+                    <p><strong>Name:</strong> ${user.name}</p>
+                    <p><strong>Email:</strong> ${user.email}</p>
+                `;
+            } else {
+                throw new Error('User not found.');
+            }
+        } catch (error) {
+            displayError(error.message);
         }
     }
 
-    // Initial load
-    window.onload = () => {
-        fetchUsers();
-    };
+    function populateUpdateForm(id, name, email) {
+        document.getElementById('update-id').value = id;
+        document.getElementById('update-name').value = name;
+        document.getElementById('update-email').value = email;
+    }
+
+    function displayError(message) {
+        const errorDiv = document.getElementById('error-message');
+        errorDiv.textContent = message;
+        setTimeout(() => errorDiv.textContent = '', 5000);
+    }
+
+    // Initial fetch
+    fetchUsers();
 </script>
 </body>
 </html>
