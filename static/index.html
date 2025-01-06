@@ -6,52 +6,163 @@
     <title>User Management</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            color: #333;
         }
-        .form, .pagination, .error {
-            margin-bottom: 20px;
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
         }
-        .form label, .form input, .form select, .form button {
-            display: block;
-            margin: 5px 0;
+
+        h1, h2 {
+            margin: 0;
+            padding-bottom: 10px;
         }
-        table {
+
+        .form {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .form input, .form select, .form button, .form textarea {
             width: 100%;
-            border-collapse: collapse;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
         }
-        table, th, td {
-            border: 1px solid black;
+
+        .form input:focus, .form select:focus, .form textarea:focus {
+            border-color: #007bff;
+            outline: none;
         }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        .delete-button, .update-button {
-            background-color: #dc3545;
+
+        button {
+            background-color: #007bff;
             color: white;
             border: none;
-            padding: 5px 10px;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .delete-button, .update-button {
+            padding: 8px 15px;
+            border-radius: 6px;
+            color: white;
             cursor: pointer;
         }
+
+        .delete-button {
+            background-color: #dc3545;
+        }
+
         .update-button {
             background-color: #007bff;
         }
+
         .delete-button:hover {
             background-color: #c82333;
         }
+
         .update-button:hover {
             background-color: #0056b3;
         }
-        .pagination button {
-            margin: 5px;
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f1f1f1;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            padding: 10px 20px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 6px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .pagination button:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+
     </style>
 </head>
 <body>
-<h1>User Management</h1>
+<header>
+    <h1>User Management</h1>
+</header>
 
 <div class="error" id="error-message"></div>
+
+<!-- Email Broadcast Form -->
+<div class="form">
+    <h2>Send Broadcast Email</h2>
+    <label for="email-to">Recipient</label>
+    <input type="text" id="email-to" placeholder="Enter recipient email or 'all' for broadcast">
+    <label for="email-subject">Subject</label>
+    <input type="text" id="email-subject" placeholder="Enter email subject">
+    <label for="email-body">Message</label>
+    <textarea id="email-body" placeholder="Enter your message"></textarea>
+    <label for="email-file">Attachment</label>
+    <input type="file" id="email-file">
+    <button onclick="sendBroadcastEmail()">Send Email</button>
+</div>
 
 <!-- Create User Form -->
 <div class="form">
@@ -122,11 +233,18 @@
     <span id="current-page">1</span>
     <button id="next-page" onclick="nextPage()">Next</button>
 </div>
+<br>
+<h2 align="center">Find information about the movie</h2>
+<div id="movieContainer">
+    <input type="text" id="movieTitle" placeholder="Enter the name of movie">
+    <button id="getMovieBtn">Find films</button>
+    <div id="movieInfo"></div>
+</div>
 
 <script>
     let currentPage = 1; // Текущая страница
-    const limit = 2;    // Количество пользователей на странице
-    let allUsers = []; // Все пользователи, загруженные с сервера
+    const limit = 10;     // Количество пользователей на странице
+    let totalPages = 6;  // Общее количество страниц
 
     async function fetchUsers() {
         const filterName = document.getElementById('filter-name').value;
@@ -135,16 +253,16 @@
 
         try {
             // Формируем URL для запроса к API
-            const response = await fetch(`/users?name=${filterName}&sort=${sortField}&order=${sortOrder}`);
+            const response = await fetch(`/users?page=${currentPage}&limit=${limit}&name=${filterName}&sort=${sortField}&order=${sortOrder}`);
             if (!response.ok) throw new Error('Failed to fetch users.');
 
             const data = await response.json();
 
-            // Сохраняем всех пользователей в allUsers
-            allUsers = data.data || [];
+            // Сохраняем общее количество страниц
+            totalPages = data.totalPages || 1;
 
-            // Отображаем первую страницу
-            displayPage(currentPage);
+            // Отображаем текущую страницу
+            displayUsers(data.data || []);
 
             // Обновляем состояние кнопок пагинации
             updatePaginationButtons();
@@ -153,31 +271,26 @@
         }
     }
 
-    function displayPage(page) {
+    function displayUsers(users) {
         const userList = document.getElementById('user-list');
         userList.innerHTML = '';
 
-        // Вычисляем начальный и конечный индексы для отображения
-        const startIndex = (page - 1) * limit;
-        const endIndex = startIndex + limit;
-        const usersToDisplay = allUsers.slice(startIndex, endIndex);
-
-        if (usersToDisplay.length === 0) {
+        if (users.length === 0) {
             userList.innerHTML = '<tr><td colspan="4">No users found.</td></tr>';
             return;
         }
 
-        usersToDisplay.forEach(user => {
+        users.forEach(user => {
             const row = document.createElement('tr');
             row.innerHTML = `
-                    <td>${user.id}</td>
-                    <td>${user.name}</td>
-                    <td>${user.email}</td>
-                    <td>
-                        <button class="delete-button" onclick="deleteUser(${user.id})">Delete</button>
-                        <button class="update-button" onclick="populateUpdateForm(${user.id}, '${user.name}', '${user.email}')">Update</button>
-                    </td>
-                `;
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>
+                    <button class="delete-button" onclick="deleteUser(${user.id})">Delete</button>
+                    <button class="update-button" onclick="populateUpdateForm(${user.id}, '${user.name}', '${user.email}')">Update</button>
+                </td>
+            `;
             userList.appendChild(row);
         });
     }
@@ -187,7 +300,7 @@
         const nextButton = document.getElementById('next-page');
 
         prevButton.disabled = currentPage <= 1;
-        nextButton.disabled = currentPage >= Math.ceil(allUsers.length / limit);
+        nextButton.disabled = currentPage >= totalPages;
 
         document.getElementById('current-page').textContent = currentPage;
     }
@@ -195,16 +308,14 @@
     function prevPage() {
         if (currentPage > 1) {
             currentPage--;
-            displayPage(currentPage);
-            updatePaginationButtons();
+            fetchUsers();
         }
     }
 
     function nextPage() {
-        if (currentPage < Math.ceil(allUsers.length / limit)) {
+        if (currentPage < totalPages) {
             currentPage++;
-            displayPage(currentPage);
-            updatePaginationButtons();
+            fetchUsers();
         }
     }
 
@@ -305,6 +416,88 @@
 
     // Initial fetch
     fetchUsers();
+    async function sendBroadcastEmail() {
+        const to = document.getElementById('email-to').value.trim();
+        const subject = document.getElementById('email-subject').value.trim();
+        const body = document.getElementById('email-body').value.trim();
+        const fileInput = document.getElementById('email-file');
+
+        if (!to || !subject || !body) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('json', JSON.stringify({ to, subject, body }));
+
+        if (fileInput.files.length > 0) {
+            formData.append('file', fileInput.files[0]);
+        }
+
+        try {
+            const response = await fetch('/send-email', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Server error: ${errorText}`);
+            }
+
+            const data = await response.json();
+            alert(data.message || 'Email sent successfully!');
+        } catch (error) {
+            console.error('Error sending email:', error);
+            alert(error.message || 'An error occurred while sending the email.');
+        }
+    }
+    const apiKey = '2d5c7316';
+    const getMovieBtn = document.getElementById('getMovieBtn');
+    const movieTitleInput = document.getElementById('movieTitle');
+    const movieInfo = document.getElementById('movieInfo');
+
+    // Функция для получения данных о фильме
+    async function getMovie() {
+        const movieTitle = movieTitleInput.value.trim();
+
+        if (movieTitle === '') {
+            movieInfo.textContent = 'Введите название фильма.';
+            return;
+        }
+
+        // Строка URL должна быть в кавычках
+        const url = `https://www.omdbapi.com/?t=${movieTitle}&apikey=${apiKey}`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (response.ok && data.Response !== "False") {
+                displayMovie(data);
+            } else {
+                movieInfo.textContent = `Фильм не найден: ${data.Error}`;
+            }
+        } catch (error) {
+            movieInfo.textContent = 'Ошибка сети или API: ' + error.message;
+        }
+    }
+
+    // Функция для отображения данных о фильме
+    function displayMovie(data) {
+        // HTML должен быть строкой, заключённой в кавычки
+        movieInfo.innerHTML = `
+        <h3>${data.Title} (${data.Year})</h3>
+        <p>Genre: ${data.Genre}</p>
+        <p>Rating IMDb: ${data.imdbRating}</p>
+        <p>Director: ${data.Director}</p>
+        <p>Plot: ${data.Plot}</p>
+        <img src="${data.Poster !== 'N/A' ? data.Poster : 'placeholder.jpg'}" alt="Постер фильма">
+    `;
+    }
+
+    // Обработчик события на кнопку
+    getMovieBtn.addEventListener('click', getMovie);
 </script>
 </body>
 </html>

@@ -3,6 +3,7 @@ package main
 import (
 	"PracticeServer/db"
 	"PracticeServer/logging"
+	"PracticeServer/movies"
 	"context"
 	"go.uber.org/zap"
 	"log"
@@ -15,6 +16,7 @@ import (
 func main() {
 	router := NewRouter()
 	db.NewDb()
+	movies.SeedMovies()
 	// Указываем серверу использовать папку "static" для HTML, CSS и JS
 	http.Handle("/", http.FileServer(http.Dir("./static")))
 

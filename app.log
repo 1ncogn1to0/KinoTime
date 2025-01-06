@@ -182,3 +182,200 @@
 {"level":"INFO","time":"2025-01-05T16:23:21.874+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
 {"level":"ERROR","time":"2025-01-05T16:23:39.439+0500","caller":"users/getbyid.go:22","msg":"Failed to get user:","error":"record not found"}
 {"level":"ERROR","time":"2025-01-05T16:23:46.481+0500","caller":"users/getbyid.go:22","msg":"Failed to get user:","error":"record not found"}
+{"level":"INFO","time":"2025-01-06T08:05:34.938+0500","caller":"KinoTime-main/main.go:32","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-01-06T08:06:51.477+0500","caller":"users/create.go:37","msg":"User created successfully","name":"ds","func":"CreateUser"}
+{"level":"INFO","time":"2025-01-06T08:07:11.230+0500","caller":"users/create.go:37","msg":"User created successfully","name":"ds","func":"CreateUser"}
+{"level":"INFO","time":"2025-01-06T08:07:12.877+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T08:07:24.227+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T08:33:38.633+0500","caller":"KinoTime-main/main.go:42","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-01-06T08:33:38.638+0500","caller":"KinoTime-main/main.go:34","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-01-06T08:33:38.638+0500","caller":"KinoTime-main/main.go:50","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-01-06T08:33:42.945+0500","caller":"KinoTime-main/main.go:34","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-01-06T08:40:57.709+0500","caller":"KinoTime-main/main.go:44","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-01-06T08:40:57.709+0500","caller":"KinoTime-main/main.go:36","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-01-06T08:40:57.710+0500","caller":"KinoTime-main/main.go:52","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-01-06T08:41:49.875+0500","caller":"KinoTime-main/main.go:34","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-01-06T08:42:11.459+0500","caller":"users/create.go:37","msg":"User created successfully","name":"вв","func":"CreateUser"}
+{"level":"INFO","time":"2025-01-06T08:42:12.823+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T08:47:41.598+0500","caller":"users/create.go:37","msg":"User created successfully","name":"ыыы","func":"CreateUser"}
+{"level":"INFO","time":"2025-01-06T08:47:42.891+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T08:49:26.843+0500","caller":"users/create.go:37","msg":"User created successfully","name":"ыыыы","func":"CreateUser"}
+{"level":"INFO","time":"2025-01-06T08:49:28.394+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T08:52:36.660+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T08:52:39.078+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T08:52:45.688+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T08:52:50.778+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T08:53:03.662+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T08:53:07.926+0500","caller":"users/getbyid.go:27","msg":"successfully retrieved a user","func":"GetByIdUsers"}
+{"level":"INFO","time":"2025-01-06T09:19:51.994+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T09:19:58.772+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T09:20:00.975+0500","caller":"users/delete.go:25","msg":"User deleted successfully","id":"4","func":"DeleteUsers"}
+{"level":"INFO","time":"2025-01-06T09:20:03.030+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T09:20:08.531+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T09:25:44.918+0500","caller":"KinoTime-main/main.go:44","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-01-06T09:25:44.919+0500","caller":"KinoTime-main/main.go:36","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-01-06T09:25:44.919+0500","caller":"KinoTime-main/main.go:52","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-01-06T09:28:06.252+0500","caller":"KinoTime-main/main.go:34","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-01-06T09:39:31.767+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T09:39:49.607+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T09:58:33.871+0500","caller":"KinoTime-main/main.go:44","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-01-06T09:58:33.872+0500","caller":"KinoTime-main/main.go:36","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-01-06T09:58:33.872+0500","caller":"KinoTime-main/main.go:52","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-01-06T09:58:37.901+0500","caller":"KinoTime-main/main.go:37","msg":"Сервер запущен: http://localhost:8080"}
+{"level":"INFO","time":"2025-01-06T09:58:59.888+0500","caller":"email/email.go:112","msg":"Email sent successfully","To":"samatkhairulin@gmail.com"}
+{"level":"INFO","time":"2025-01-06T10:43:46.656+0500","caller":"KinoTime-main/main.go:48","msg":"Остановка сервера..."}
+{"level":"INFO","time":"2025-01-06T10:43:52.248+0500","caller":"KinoTime-main/main.go:37","msg":"Сервер запущен: http://localhost:8080"}
+{"level":"INFO","time":"2025-01-06T10:52:31.766+0500","caller":"KinoTime-main/main.go:48","msg":"Остановка сервера..."}
+{"level":"INFO","time":"2025-01-06T10:52:35.434+0500","caller":"KinoTime-main/main.go:36","msg":"Сервер запущен: http://localhost:8080"}
+{"level":"INFO","time":"2025-01-06T10:53:21.416+0500","caller":"KinoTime-main/main.go:47","msg":"Остановка сервера..."}
+{"level":"INFO","time":"2025-01-06T10:53:24.066+0500","caller":"KinoTime-main/main.go:36","msg":"Сервер запущен: http://localhost:8080"}
+{"level":"INFO","time":"2025-01-06T10:53:50.117+0500","caller":"KinoTime-main/main.go:47","msg":"Остановка сервера..."}
+{"level":"INFO","time":"2025-01-06T10:53:52.716+0500","caller":"KinoTime-main/main.go:37","msg":"Сервер запущен: http://localhost:8080"}
+{"level":"INFO","time":"2025-01-06T10:55:30.056+0500","caller":"KinoTime-main/main.go:48","msg":"Остановка сервера..."}
+{"level":"INFO","time":"2025-01-06T10:55:32.775+0500","caller":"KinoTime-main/main.go:46","msg":"Сервер запущен: http://localhost:8080"}
+{"level":"INFO","time":"2025-01-06T11:10:56.349+0500","caller":"KinoTime-main/main.go:57","msg":"Остановка сервера..."}
+{"level":"INFO","time":"2025-01-06T11:10:59.149+0500","caller":"KinoTime-main/main.go:49","msg":"Сервер запущен: http://localhost:8080"}
+{"level":"INFO","time":"2025-01-06T11:12:09.846+0500","caller":"KinoTime-main/main.go:60","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"INFO","time":"2025-01-06T11:12:09.848+0500","caller":"KinoTime-main/main.go:66","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-01-06T11:12:12.214+0500","caller":"KinoTime-main/main.go:34","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-01-06T11:12:46.285+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:13:08.702+0500","caller":"users/getbyid.go:27","msg":"successfully retrieved a user","func":"GetByIdUsers"}
+{"level":"INFO","time":"2025-01-06T11:15:43.145+0500","caller":"KinoTime-main/main.go:44","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-01-06T11:15:43.146+0500","caller":"KinoTime-main/main.go:36","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-01-06T11:15:43.146+0500","caller":"KinoTime-main/main.go:52","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-01-06T11:15:45.948+0500","caller":"KinoTime-main/main.go:46","msg":"Сервер запущен: http://localhost:8080"}
+{"level":"INFO","time":"2025-01-06T11:16:11.677+0500","caller":"email/email.go:112","msg":"Email sent successfully","To":"samatkhairulin@gmail.com"}
+{"level":"INFO","time":"2025-01-06T11:16:14.777+0500","caller":"email/email.go:112","msg":"Email sent successfully","To":"samatkhairulin@gmail.com"}
+{"level":"INFO","time":"2025-01-06T11:24:04.114+0500","caller":"KinoTime-main/main.go:57","msg":"Остановка сервера..."}
+{"level":"INFO","time":"2025-01-06T11:24:07.066+0500","caller":"KinoTime-main/main.go:34","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-01-06T11:26:10.271+0500","caller":"KinoTime-main/main.go:44","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-01-06T11:26:10.271+0500","caller":"KinoTime-main/main.go:36","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-01-06T11:26:10.271+0500","caller":"KinoTime-main/main.go:52","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-01-06T11:26:12.209+0500","caller":"KinoTime-main/main.go:36","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-01-06T11:26:22.345+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:26:34.694+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:26:53.917+0500","caller":"users/update.go:53","msg":"User updated successfully","func":"UpdateUsers"}
+{"level":"INFO","time":"2025-01-06T11:26:55.372+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:27:15.609+0500","caller":"users/create.go:37","msg":"User created successfully","name":"ss","func":"CreateUser"}
+{"level":"INFO","time":"2025-01-06T11:28:42.636+0500","caller":"KinoTime-main/main.go:46","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-01-06T11:28:42.637+0500","caller":"KinoTime-main/main.go:38","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-01-06T11:28:42.638+0500","caller":"KinoTime-main/main.go:54","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-01-06T11:28:45.401+0500","caller":"KinoTime-main/main.go:34","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-01-06T11:28:54.967+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"ERROR","time":"2025-01-06T11:29:03.465+0500","caller":"users/getbyid.go:22","msg":"Failed to get user:","error":"record not found"}
+{"level":"ERROR","time":"2025-01-06T11:29:04.500+0500","caller":"users/getbyid.go:22","msg":"Failed to get user:","error":"record not found"}
+{"level":"INFO","time":"2025-01-06T11:29:16.005+0500","caller":"users/getbyid.go:27","msg":"successfully retrieved a user","func":"GetByIdUsers"}
+{"level":"INFO","time":"2025-01-06T11:29:36.833+0500","caller":"email/email.go:112","msg":"Email sent successfully","To":"samatkhairulin@gmail.com"}
+{"level":"INFO","time":"2025-01-06T11:29:39.914+0500","caller":"email/email.go:112","msg":"Email sent successfully","To":"samatkhairulin@gmail.com"}
+{"level":"WARN","time":"2025-01-06T11:31:01.118+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T11:31:02.251+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T11:31:03.797+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T11:31:13.954+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T11:31:15.071+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T11:31:16.105+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T11:31:22.271+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T11:31:26.996+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T11:31:29.728+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T11:31:30.774+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T11:31:32.608+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T11:31:33.628+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"INFO","time":"2025-01-06T11:38:21.097+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"WARN","time":"2025-01-06T11:38:37.297+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T11:38:38.326+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T11:38:39.652+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T11:38:42.240+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T11:38:48.758+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"INFO","time":"2025-01-06T11:38:54.539+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:38:58.535+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:39:13.587+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"WARN","time":"2025-01-06T11:39:18.276+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"INFO","time":"2025-01-06T11:40:53.639+0500","caller":"KinoTime-main/main.go:44","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-01-06T11:40:53.640+0500","caller":"KinoTime-main/main.go:36","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-01-06T11:40:53.640+0500","caller":"KinoTime-main/main.go:52","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-01-06T11:41:32.600+0500","caller":"KinoTime-main/main.go:34","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-01-06T11:42:05.760+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:42:09.485+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:42:14.777+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:42:23.111+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:42:27.569+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:42:32.780+0500","caller":"users/delete.go:25","msg":"User deleted successfully","id":"15","func":"DeleteUsers"}
+{"level":"INFO","time":"2025-01-06T11:42:34.321+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:42:37.171+0500","caller":"users/delete.go:25","msg":"User deleted successfully","id":"16","func":"DeleteUsers"}
+{"level":"INFO","time":"2025-01-06T11:42:38.951+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:42:45.111+0500","caller":"users/delete.go:25","msg":"User deleted successfully","id":"17","func":"DeleteUsers"}
+{"level":"INFO","time":"2025-01-06T11:42:47.833+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:43:00.571+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"WARN","time":"2025-01-06T11:43:12.823+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T11:43:14.193+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T11:43:17.031+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T11:43:19.603+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"INFO","time":"2025-01-06T11:43:23.483+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:43:57.533+0500","caller":"email/email.go:112","msg":"Email sent successfully","To":"samatkhairulin@gmail.com"}
+{"level":"INFO","time":"2025-01-06T11:44:25.588+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:46:44.212+0500","caller":"users/getbyid.go:27","msg":"successfully retrieved a user","func":"GetByIdUsers"}
+{"level":"INFO","time":"2025-01-06T11:47:14.162+0500","caller":"users/getbyid.go:27","msg":"successfully retrieved a user","func":"GetByIdUsers"}
+{"level":"INFO","time":"2025-01-06T11:47:30.437+0500","caller":"users/getbyid.go:27","msg":"successfully retrieved a user","func":"GetByIdUsers"}
+{"level":"INFO","time":"2025-01-06T11:48:48.452+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:48:51.664+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:49:03.942+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:49:13.637+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:49:17.784+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:49:22.447+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T11:49:24.041+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T12:01:32.189+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T12:01:34.859+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T12:01:52.850+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T12:01:54.003+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T12:02:52.965+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T12:02:54.381+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T12:03:00.090+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T12:03:02.452+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T12:03:26.152+0500","caller":"users/getbyid.go:27","msg":"successfully retrieved a user","func":"GetByIdUsers"}
+{"level":"INFO","time":"2025-01-06T12:03:35.880+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:15:30.750+0500","caller":"KinoTime-main/main.go:44","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-01-06T13:15:30.754+0500","caller":"KinoTime-main/main.go:36","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-01-06T13:15:30.754+0500","caller":"KinoTime-main/main.go:52","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-01-06T13:15:34.663+0500","caller":"KinoTime-main/main.go:34","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-01-06T13:16:14.084+0500","caller":"email/email.go:112","msg":"Email sent successfully","To":"samatkhairulin@gmail.com"}
+{"level":"INFO","time":"2025-01-06T13:16:42.866+0500","caller":"email/email.go:112","msg":"Email sent successfully","To":"samatkhairulin@gmail.com"}
+{"level":"INFO","time":"2025-01-06T13:17:03.741+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:17:09.336+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:17:19.594+0500","caller":"users/getbyid.go:27","msg":"successfully retrieved a user","func":"GetByIdUsers"}
+{"level":"WARN","time":"2025-01-06T13:18:31.345+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T13:18:32.948+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T13:18:35.439+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T13:18:38.193+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"INFO","time":"2025-01-06T13:18:42.811+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"WARN","time":"2025-01-06T13:18:52.544+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T13:18:55.018+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T13:18:56.073+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T13:18:57.327+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"INFO","time":"2025-01-06T13:19:23.910+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:19:33.605+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:19:35.797+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:19:47.155+0500","caller":"users/delete.go:25","msg":"User deleted successfully","id":"6","func":"DeleteUsers"}
+{"level":"INFO","time":"2025-01-06T13:19:48.922+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:24:56.733+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:24:58.614+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:32:03.487+0500","caller":"KinoTime-main/main.go:44","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-01-06T13:32:03.488+0500","caller":"KinoTime-main/main.go:36","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-01-06T13:32:03.488+0500","caller":"KinoTime-main/main.go:52","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-01-06T13:46:49.022+0500","caller":"KinoTime-main/main.go:34","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-01-06T13:47:03.052+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:47:04.378+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:47:09.909+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:47:11.496+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:52:01.479+0500","caller":"email/email.go:112","msg":"Email sent successfully","To":"samatkhairulin@gmail.com"}
+{"level":"INFO","time":"2025-01-06T13:52:23.948+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:52:26.945+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:52:44.413+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:52:50.778+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:52:54.325+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:52:59.530+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:53:16.274+0500","caller":"users/getbyid.go:27","msg":"successfully retrieved a user","func":"GetByIdUsers"}
+{"level":"WARN","time":"2025-01-06T13:53:36.158+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"WARN","time":"2025-01-06T13:53:37.946+0500","caller":"users/getall.go:78","msg":"No users found matching the criteria"}
+{"level":"INFO","time":"2025-01-06T13:53:52.979+0500","caller":"users/getall.go:85","msg":"Users retrieved successfully","func":"GetAllUsers"}
+{"level":"INFO","time":"2025-01-06T13:56:41.101+0500","caller":"KinoTime-main/main.go:44","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"INFO","time":"2025-01-06T13:56:41.101+0500","caller":"KinoTime-main/main.go:52","msg":"Сервер успешно остановлен."}
+{"level":"ERROR","time":"2025-01-06T13:56:41.101+0500","caller":"KinoTime-main/main.go:36","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
