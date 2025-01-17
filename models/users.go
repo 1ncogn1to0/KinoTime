@@ -5,9 +5,13 @@ import (
 )
 
 type User struct {
-	ID        int64     `gorm:"column:id" json:"id"`
-	Name      string    `gorm:"column:name" json:"name"`
-	Email     string    `gorm:"column:email" json:"email"`
-	CreatedAt time.Time `gorm:"column:created_at" json:"created_at"`
-	UpdatedAt time.Time `gorm:"column:created_at" json:"updated_at"`
+	ID                int64     `gorm:"primaryKey;autoIncrement" json:"id"`
+	Name              string    `gorm:"not null" json:"name"`
+	Email             string    `gorm:"unique;not null" json:"email"`
+	RoleID            uint      `json:"role_id"`
+	Password          string    `gorm:"not null" json:"password"`
+	IsConfirmed       bool      `json:"is_confirmed"`
+	ConfirmationToken *string   `json:"confirmation_token"`
+	CreatedAt         time.Time `json:"created_at"`
+	UpdatedAt         time.Time `json:"updated_at"`
 }
