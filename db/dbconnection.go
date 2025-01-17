@@ -8,14 +8,23 @@ import (
 	"gorm.io/gorm"
 	"log"
 	"math/rand"
+	"os"
 	"time"
 )
 
 var DB *gorm.DB
 
-func NewDb() {
-	//todo: get env from .env
-	dsn := "host=localhost user=postgres password=23111974 dbname=Movie port=5433 sslmode=prefer"
+type DbConfig struct {
+	Host     string `env:"host"`
+	User     string `env:"user"`
+	Password string `env:"password"`
+	Dbname   string `env:"dbname"`
+	Port     string `env:"port"`
+	Sslmode  string `env:"sslmode"`
+}
+
+func NewDb(dbConfig DbConfig) {
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s", dbConfig.Host, dbConfig.User, dbConfig.Password, dbConfig.Dbname, dbConfig.Port, dbConfig.Sslmode)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal("Error connecting to database: ", err)
@@ -68,4 +77,15 @@ func randomBirthDate() time.Time {
 	month := time.Month(rand.Intn(12) + 1)
 	day := rand.Intn(28) + 1 // Упрощение: все месяцы до 28 дней
 	return time.Date(year, month, day, 0, 0, 0, 0, time.UTC)
+}
+
+func LoadDbConfigFromEnv() DbConfig {
+	return DbConfig{
+		Host:     os.Getenv("host"),
+		User:     os.Getenv("user"),
+		Password: os.Getenv("password"),
+		Dbname:   os.Getenv("dbname"),
+		Port:     os.Getenv("port"),
+		Sslmode:  os.Getenv("sslmode"),
+	}
 }
