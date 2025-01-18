@@ -10,8 +10,8 @@ type User struct {
 	Email             string    `gorm:"unique;not null" json:"email"`
 	RoleID            uint      `json:"role_id"`
 	Password          string    `gorm:"not null" json:"password"`
-	IsConfirmed       bool      `json:"is_confirmed"`
-	ConfirmationToken *string   `json:"confirmation_token"`
+	IsConfirmed       bool      `json:"-"`
+	ConfirmationToken *string   `json:"-"`
 	CreatedAt         time.Time `json:"created_at"`
 	UpdatedAt         time.Time `json:"updated_at"`
 }

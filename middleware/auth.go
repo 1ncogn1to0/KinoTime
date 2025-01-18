@@ -4,15 +4,18 @@ import (
 	"PracticeServer/auth"
 	"github.com/golang-jwt/jwt/v4"
 	"net/http"
+	"strings"
 )
 
 func MiddlewareAuth(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		tokenString := r.Header.Get("Authorization")
-		if tokenString == "" {
-			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		authHeader := r.Header.Get("Authorization")
+		if !strings.HasPrefix(authHeader, "Bearer ") {
+			http.Error(w, "Unauthorized: Invalid token format", http.StatusUnauthorized)
 			return
 		}
+		tokenString := strings.TrimPrefix(authHeader, "Bearer ")
+
 		claims := &auth.Claims{}
 		token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
 			return auth.JwtKey, nil

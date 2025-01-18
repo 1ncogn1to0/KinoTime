@@ -31,6 +31,10 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid email or password", http.StatusUnauthorized)
 		return
 	}
+	if user.IsConfirmed == false {
+		http.Error(w, "Confirm your email first!", http.StatusLocked)
+		return
+	}
 	claims := &Claims{
 		Email: user.Email,
 		RegisteredClaims: jwt.RegisteredClaims{

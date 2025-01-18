@@ -6,16 +6,18 @@ import (
 	"PracticeServer/models"
 	"github.com/golang-jwt/jwt/v4"
 	"net/http"
+	"strings"
 )
 
 func MiddlewareRole(requiredRole string) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			tokenString := r.Header.Get("Authorization")
-			if tokenString == "" {
-				http.Error(w, "Unauthorized", http.StatusUnauthorized)
+			authHeader := r.Header.Get("Authorization")
+			if !strings.HasPrefix(authHeader, "Bearer ") {
+				http.Error(w, "Unauthorized: Invalid token format", http.StatusUnauthorized)
 				return
 			}
+			tokenString := strings.TrimPrefix(authHeader, "Bearer ")
 
 			claims := &auth.Claims{}
 			token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
@@ -41,7 +43,7 @@ func MiddlewareRole(requiredRole string) func(http.Handler) http.Handler {
 			}
 
 			// Check if the role matches the required role
-			if role.Name != requiredRole {
+			if role.Code != requiredRole {
 				http.Error(w, "Forbidden: insufficient role permissions", http.StatusForbidden)
 				return
 			}
