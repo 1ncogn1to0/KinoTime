@@ -3,3 +3,6 @@ migrate -path db/migrations -database "postgres://postgres:23111974@localhost:54
 
 #create migrations
 migrate create -ext sql -dir db/migrations -seq users
+
+#docker build
+docker compose up -d --build

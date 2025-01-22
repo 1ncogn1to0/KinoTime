@@ -12,6 +12,14 @@ import (
 	"net/http"
 )
 
+func HashPassword(password string) (string, error) {
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		return "", err
+	}
+	return string(hashedPassword), nil
+}
+
 func Register(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var requestData models.User
@@ -19,22 +27,27 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid JSON", http.StatusBadRequest)
 		return
 	}
+
 	if requestData.Name == "" || requestData.Email == "" || requestData.Password == "" {
 		http.Error(w, "All fields are required", http.StatusBadRequest)
 		return
 	}
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(requestData.Password), bcrypt.DefaultCost)
+
+	hashedPassword, err := HashPassword(requestData.Password)
 	if err != nil {
 		http.Error(w, "Failed to hash password", http.StatusInternalServerError)
 		return
 	}
-	requestData.Password = string(hashedPassword)
+	requestData.Password = hashedPassword
+
 	db.DB.Create(&requestData)
+
 	err = email.SendRegistrationEmail(requestData)
 	if err != nil {
 		http.Error(w, "Failed to send email", http.StatusInternalServerError)
 		return
 	}
+
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(users.Response{Status: "success", Message: "User registered successfully"})
 }

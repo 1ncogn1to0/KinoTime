@@ -18,11 +18,6 @@ func NewRouter() *mux.Router {
 
 	authRoutes := router.PathPrefix("/").Subrouter()
 	authRoutes.Use(middleware.MiddlewareAuth)
-	authRoutes.HandleFunc("/users", users.GetAllUsers).Methods("GET")
-	authRoutes.HandleFunc("/users", users.CreateUser).Methods("POST")
-	authRoutes.HandleFunc("/users/{id}", users.GetByIdUsers).Methods("GET")
-	authRoutes.HandleFunc("/users/{id}", users.UpdateUsers).Methods("PUT")
-	authRoutes.HandleFunc("/users/{id}", users.DeleteUsers).Methods("DELETE")
 
 	router.HandleFunc("/email", email.SendEmail).Methods("POST")
 	router.HandleFunc("/send-email", email.SendEmail)
@@ -41,7 +36,14 @@ func NewRouter() *mux.Router {
 	adminRoutes.HandleFunc("/roles/{id}", roles.UpdateRole).Methods("PUT")
 	adminRoutes.HandleFunc("/roles/{id}", roles.DeleteRole).Methods("DELETE")
 
+	adminRoutes.HandleFunc("/users", users.GetAllUsers).Methods("GET")
+	adminRoutes.HandleFunc("/users", users.CreateUser).Methods("POST")
+	adminRoutes.HandleFunc("/users/{id}", users.GetByIdUsers).Methods("GET")
+	adminRoutes.HandleFunc("/users/{id}", users.UpdateUsers).Methods("PUT")
+	adminRoutes.HandleFunc("/users/{id}", users.DeleteUsers).Methods("DELETE")
+
 	router.HandleFunc("/profile", auth.ShowProfile).Methods("GET")
+	authRoutes.HandleFunc("/users/{id}", users.UpdateUsers).Methods("PUT")
 
 	//middleware only here!
 	router.Use(middleware.RateLimit)

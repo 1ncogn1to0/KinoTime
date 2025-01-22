@@ -3,6 +3,7 @@ package main
 import (
 	"PracticeServer/db"
 	"PracticeServer/logging"
+	"PracticeServer/models"
 	"PracticeServer/movies"
 	"context"
 	"github.com/joho/godotenv"
@@ -24,6 +25,12 @@ func main() {
 	router := NewRouter()
 	dbConfig := db.LoadDbConfigFromEnv()
 	db.NewDb(dbConfig)
+	role := models.Role{
+		ID:   1,
+		Name: "Администратор",
+		Code: "admin",
+	}
+	db.DB.Create(role)
 	movies.SeedMovies()
 	// Указываем серверу использовать папку "static" для HTML, CSS и JS
 	http.Handle("/", http.FileServer(http.Dir("./static")))

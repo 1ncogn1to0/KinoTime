@@ -31,12 +31,13 @@ func NewDb(dbConfig DbConfig) {
 	}
 
 	// AutoMigrate models
-	if err := db.AutoMigrate(&models.User{}, &models.Movie{}); err != nil {
+	if err := db.AutoMigrate(&models.User{}, &models.Movie{}, &models.Role{}); err != nil {
 		log.Fatal("Error migrating User model: ", err)
 	}
 
 	// Seed data
-	seedUsers(db)
+	//seedUsers(db)
+	//seedRoles(db)
 
 	DB = db
 	fmt.Println("Database connected successfully!")
@@ -69,6 +70,27 @@ func seedUsers(db *gorm.DB) {
 		}
 	}
 	fmt.Println("User seed data added successfully!")
+}
+
+func seedRoles(db *gorm.DB) {
+	roles := []models.Role{
+		{Name: "Администратор", Code: "admin"},
+		{Name: "Пользователь", Code: "user"},
+		{Name: "Контент-мейкер", Code: "content_maker"},
+	}
+
+	for _, role := range roles {
+		var existingRole models.Role
+		result := db.Where("code = ?", role.Code).First(&existingRole)
+		if result.Error != nil {
+			if result.Error == gorm.ErrRecordNotFound {
+				db.Create(&role)
+				fmt.Printf("Role '%s' seeded\n", role.Name)
+			} else {
+				log.Println("Error checking existing role:", result.Error)
+			}
+		}
+	}
 }
 
 func randomBirthDate() time.Time {
