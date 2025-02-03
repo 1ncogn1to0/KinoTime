@@ -1,9 +1,7 @@
 package movies
 
 import (
-	"PracticeServer/db"
 	"PracticeServer/models"
-	"log"
 )
 
 func SeedMovies() {
@@ -51,13 +49,4 @@ func SeedMovies() {
 		}
 		movies = append(movies, movie)
 	}
-
-	for _, movie := range movies {
-		result := db.DB.Create(&movie)
-		if result.Error != nil {
-			log.Printf("Error creating movie: %v", result.Error)
-		}
-	}
-
-	log.Println("30 movies successfully added to the database!")
 }
