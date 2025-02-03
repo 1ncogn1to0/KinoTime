@@ -1,0 +1,5 @@
+#up db
+migrate -path db/migrations -database "postgres://postgres:23111974@localhost:5432/Movie?sslmode=disable" up
+
+#create migrations
+migrate create -ext sql -dir db/migrations -seq users

@@ -5,6 +5,7 @@ import (
 	"PracticeServer/logging"
 	"PracticeServer/movies"
 	"context"
+	"github.com/joho/godotenv"
 	"go.uber.org/zap"
 	"log"
 	"net/http"
@@ -13,9 +14,16 @@ import (
 	"time"
 )
 
+func init() {
+	if err := godotenv.Load(".env"); err != nil {
+		log.Fatal("Error loading .env file")
+	}
+}
+
 func main() {
 	router := NewRouter()
-	db.NewDb()
+	dbConfig := db.LoadDbConfigFromEnv()
+	db.NewDb(dbConfig)
 	movies.SeedMovies()
 	// Указываем серверу использовать папку "static" для HTML, CSS и JS
 	http.Handle("/", http.FileServer(http.Dir("./static")))
