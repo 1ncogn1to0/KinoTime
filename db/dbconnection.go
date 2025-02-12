@@ -28,12 +28,11 @@ func NewDb(dbConfig DbConfig) {
 	if err != nil {
 		log.Fatal("Error connecting to database: ", err)
 	}
-
 	// AutoMigrate models
 	if err := db.AutoMigrate(&models.User{}, &models.Movie{}); err != nil {
 		log.Fatal("Error migrating User model: ", err)
 	}
-
+	fmt.Println(err)
 	DB = db
 	fmt.Println("Database connected successfully!")
 }

@@ -8,20 +8,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/go-gomail/gomail"
-	"github.com/joho/godotenv"
 	"go.uber.org/zap"
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"path/filepath"
 )
-
-func init() {
-	if err := godotenv.Load(".env"); err != nil {
-		log.Fatal("Error loading .env file")
-	}
-}
 
 func SendEmail(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseMultipartForm(10 << 20)
@@ -49,7 +41,7 @@ func SendEmail(w http.ResponseWriter, r *http.Request) {
 	}
 
 	mailer := gomail.NewMessage()
-	mailer.SetHeader("From", os.Getenv("SMTP_USER"))
+	mailer.SetHeader("From", "akmagambetovaanel0@gmail.com")
 	mailer.SetHeader("Subject", emailReq.Subject)
 	mailer.SetBody("text/plain", emailReq.Body)
 
@@ -78,10 +70,10 @@ func SendEmail(w http.ResponseWriter, r *http.Request) {
 	}
 
 	dialer := gomail.NewDialer(
-		os.Getenv("SMTP_HOST"),
+		"smtp.gmail.com",
 		587,
-		os.Getenv("SMTP_USER"),
-		os.Getenv("SMTP_PASS"),
+		"akmagambetovaanel0@gmail.com",
+		"eovhhltvesmpbvvn",
 	)
 
 	if emailReq.To != "all" {

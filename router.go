@@ -16,6 +16,10 @@ func NewRouter() *mux.Router {
 		http.ServeFile(w, r, "static/index.html")
 	}).Methods("GET")
 
+    router.HandleFunc("/payment", func(w http.ResponseWriter, r *http.Request) {
+    		http.ServeFile(w, r, "static/payment.html")
+    	}).Methods("GET")
+
 	router.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "static/login.html")
 	}).Methods("GET")

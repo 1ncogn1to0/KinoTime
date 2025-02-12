@@ -3,7 +3,6 @@ package main
 import (
 	"PracticeServer/db"
 	"PracticeServer/logging"
-	"PracticeServer/movies"
 	"context"
 	"github.com/joho/godotenv"
 	"go.uber.org/zap"
@@ -24,15 +23,14 @@ func main() {
 	router := NewRouter()
 	dbConfig := db.LoadDbConfigFromEnv()
 	db.NewDb(dbConfig)
-	movies.SeedMovies()
+	//movies.SeedMovies()
 	// Указываем серверу использовать папку "static" для HTML, CSS и JS
-	http.Handle("/", http.FileServer(http.Dir("./static")))
+	//http.Handle("/", http.FileServer(http.Dir("./static")))
 
 	err := logging.NewLogger()
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	// Запускаем сервер на порту 8080
 	server := &http.Server{
 		Addr:    ":8080",
@@ -44,7 +42,6 @@ func main() {
 			logging.Logger.Error("Ошибка запуска сервера:", zap.Error(err))
 		}
 	}()
-
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, os.Interrupt)
 
@@ -53,13 +50,11 @@ func main() {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-
 	if err := server.Shutdown(ctx); err != nil {
 		logging.Logger.Error("Ошибка при завершении сервера:", zap.Error(err))
 	} else {
 		logging.Logger.Info("Сервер успешно остановлен.")
 	}
-
 	db.CloseDb()
 	logging.Logger.Sync()
 }

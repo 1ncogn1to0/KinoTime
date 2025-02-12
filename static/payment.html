@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Оплата подписки</title>
+    <style>
+        /* Общий стиль для страницы */
+        body {
+            background: #f4f7f8;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        /* Контейнер формы */
+        .container {
+            background: #fff;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        /* Заголовок */
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 1em;
+        }
+        /* Форма в виде flex-контейнера */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        /* Метки */
+        label {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 0.2em;
+        }
+        /* Поля ввода, выпадающий список и кнопка */
+        input, select, button {
+            padding: 0.8em;
+            margin-bottom: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        /* Эффект при фокусе */
+        input:focus, select:focus, button:focus {
+            outline: none;
+            border-color: #6ca0dc;
+            box-shadow: 0 0 3px #6ca0dc;
+        }
+        /* Кнопка с эффектом наведения */
+        button {
+            background: #6ca0dc;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #5b8ac4;
+        }
+        /* Блок для статуса платежа */
+        #response {
+            margin-top: 1em;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        /* Стиль для различных состояний */
+        .status-pending {
+            color: #FFA500; /* Оранжевый для ожидания */
+        }
+        .status-success {
+            color: #008000; /* Зеленый для успеха */
+        }
+        .status-failure {
+            color: #FF0000; /* Красный для отказа/ошибки */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Оплата подписки</h1>
+    <!-- Wrap the form elements in a form with id "paymentForm" -->
+    <form id="paymentForm">
+        <!-- Если вы больше не хотите вводить User ID вручную, этот блок можно удалить -->
+        <!-- <label for="user_id">User ID</label>
+        <input type="number" id="user_id" name="user_id" placeholder="Введите ваш ID" required> -->
+
+        <label for="subscription_id">Выберите подписку</label>
+        <select id="subscription_id" name="subscription_id" required>
+            <option value="">Загрузка...</option>
+        </select>
+
+        <label for="card_number">Номер карты</label>
+        <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" required>
+
+        <label for="expiration_date">Срок действия (MM/YYYY)</label>
+        <input type="text" id="expiration_date" name="expiration_date" placeholder="12/2024" required>
+
+        <label for="cvv">CVV</label>
+        <input type="text" id="cvv" name="cvv" placeholder="123" required>
+
+        <button type="submit">Оплатить</button>
+    </form>
+    <div id="response"></div>
+</div>
+
+<script>
+    // Заполняем выпадающий список подписок при загрузке страницы
+    window.addEventListener("DOMContentLoaded", function() {
+        const select = document.getElementById("subscription_id");
+        select.innerHTML = "";
+        // Получаем подписки с сервера
+        fetch('http://localhost:8081/subscription', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(result => {
+                if(result.status === "success" && result.data) {
+                    // Добавляем дефолтный вариант
+                    const defaultOption = document.createElement("option");
+                    defaultOption.value = "";
+                    defaultOption.text = "Выберите подписку";
+                    select.appendChild(defaultOption);
+                    // Заполняем список подписками
+                    result.data.forEach(subscription => {
+                        const option = document.createElement("option");
+                        option.value = subscription.id;
+                        option.text = subscription.plan;
+                        select.appendChild(option);
+                    });
+                } else {
+                    select.innerHTML = "<option value=''>Нет подписок</option>";
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching subscriptions:", error);
+                select.innerHTML = "<option value=''>Ошибка загрузки подписок</option>";
+            });
+    });
+
+    // Обработка отправки формы
+    document.getElementById('paymentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const statusDiv = document.getElementById("response");
+        statusDiv.innerText = "Ожидание ответа...";
+        statusDiv.className = "status-pending";
+
+        // Получаем токен из localStorage
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            statusDiv.innerText = "Ошибка: Нет токена авторизации";
+            statusDiv.className = "status-failure";
+            return;
+        }
+
+        // Сначала запрашиваем профиль пользователя, чтобы получить user ID
+        fetch('http://localhost:8080/profile', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then(profileResponse => profileResponse.json())
+            .then(profileResult => {
+                if (profileResult.status !== "success" || !profileResult.data || !profileResult.data.ID) {
+                    throw new Error("Не удалось получить профиль пользователя");
+                }
+                // Получаем user id из профиля
+                const userId = profileResult.data.ID;
+
+                // Собираем данные платежа из формы
+                const subscriptionId = document.getElementById('subscription_id').value;
+                const cardNumber = document.getElementById('card_number').value;
+                const expirationDate = document.getElementById('expiration_date').value;
+                const cvv = document.getElementById('cvv').value;
+
+                const data = {
+                    user_id: Number(userId),
+                    subscription_id: Number(subscriptionId),
+                    payment_form: {
+                        card_number: cardNumber,
+                        expiration_date: expirationDate,
+                        cvv: cvv
+                    }
+                };
+
+                // Фиксируем время начала запроса для обеспечения задержки в 5 секунд
+                const startTime = Date.now();
+
+                // Отправляем запрос для оплаты с добавлением токена в заголовок
+                return fetch('http://localhost:8081/payment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(paymentResponse => paymentResponse.json())
+                    .then(paymentResult => {
+                        const elapsed = Date.now() - startTime;
+                        const remainingTime = Math.max(5000 - elapsed, 0);
+                        setTimeout(() => {
+                            if(paymentResult.status === "success") {
+                                statusDiv.innerText = "Оплачено";
+                                statusDiv.className = "status-success";
+                            } else {
+                                statusDiv.innerText = "Отказано";
+                                statusDiv.className = "status-failure";
+                            }
+                        }, remainingTime);
+                    });
+            })
+            .catch(error => {
+                statusDiv.innerText = "Ошибка: " + error.message;
+                statusDiv.className = "status-failure";
+            });
+    });
+</script>
+</body>
+</html>

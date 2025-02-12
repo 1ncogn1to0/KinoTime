@@ -1,1 +1,53 @@
 {"level":"INFO","time":"2025-02-03T14:46:39.123+0500","caller":"KinoTime-main/main.go:42","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-02-13T00:31:00.405+0500","caller":"KinoTime/main.go:46","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-02-13T00:31:08.755+0500","caller":"KinoTime/main.go:56","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-02-13T00:31:08.755+0500","caller":"KinoTime/main.go:48","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-02-13T00:31:08.755+0500","caller":"KinoTime/main.go:64","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-02-13T00:31:32.153+0500","caller":"KinoTime/main.go:46","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-02-13T00:40:50.041+0500","caller":"KinoTime/main.go:56","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"INFO","time":"2025-02-13T00:40:50.048+0500","caller":"KinoTime/main.go:64","msg":"Сервер успешно остановлен."}
+{"level":"ERROR","time":"2025-02-13T00:40:50.047+0500","caller":"KinoTime/main.go:48","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-02-13T00:40:54.930+0500","caller":"KinoTime/main.go:46","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-02-13T00:50:50.354+0500","caller":"KinoTime/main.go:56","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-02-13T00:50:50.356+0500","caller":"KinoTime/main.go:48","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-02-13T00:50:50.357+0500","caller":"KinoTime/main.go:64","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-02-13T00:50:54.169+0500","caller":"KinoTime/main.go:46","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-02-13T00:51:03.956+0500","caller":"email/email.go:104","msg":"Email sent successfully","To":"aakm25305@gmail.com"}
+{"level":"INFO","time":"2025-02-13T00:51:11.395+0500","caller":"email/email.go:104","msg":"Email sent successfully","To":"aakm25305@gmail.com"}
+{"level":"INFO","time":"2025-02-13T00:56:32.193+0500","caller":"KinoTime/main.go:56","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-02-13T00:56:32.199+0500","caller":"KinoTime/main.go:48","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-02-13T00:56:32.200+0500","caller":"KinoTime/main.go:64","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-02-13T00:56:36.331+0500","caller":"KinoTime/main.go:46","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-02-13T00:57:32.743+0500","caller":"KinoTime/main.go:56","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-02-13T00:57:32.743+0500","caller":"KinoTime/main.go:48","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-02-13T00:57:32.743+0500","caller":"KinoTime/main.go:64","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-02-13T00:57:36.592+0500","caller":"KinoTime/main.go:46","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-02-13T00:59:53.969+0500","caller":"KinoTime/main.go:56","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"INFO","time":"2025-02-13T00:59:53.972+0500","caller":"KinoTime/main.go:64","msg":"Сервер успешно остановлен."}
+{"level":"ERROR","time":"2025-02-13T00:59:53.971+0500","caller":"KinoTime/main.go:48","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-02-13T00:59:58.904+0500","caller":"KinoTime/main.go:46","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-02-13T01:02:20.039+0500","caller":"KinoTime/main.go:56","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-02-13T01:02:20.040+0500","caller":"KinoTime/main.go:48","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-02-13T01:02:20.040+0500","caller":"KinoTime/main.go:64","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-02-13T01:02:24.603+0500","caller":"KinoTime/main.go:46","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-02-13T01:03:18.639+0500","caller":"KinoTime/main.go:56","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-02-13T01:03:18.643+0500","caller":"KinoTime/main.go:48","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-02-13T01:03:18.643+0500","caller":"KinoTime/main.go:64","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-02-13T01:03:23.561+0500","caller":"KinoTime/main.go:46","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-02-13T01:04:02.715+0500","caller":"email/email.go:104","msg":"Email sent successfully","To":"aakm25305@gmail.com"}
+{"level":"INFO","time":"2025-02-13T01:14:28.675+0500","caller":"KinoTime/main.go:56","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-02-13T01:14:28.681+0500","caller":"KinoTime/main.go:48","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-02-13T01:14:28.682+0500","caller":"KinoTime/main.go:64","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-02-13T01:14:48.488+0500","caller":"KinoTime/main.go:40","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-02-13T01:14:53.654+0500","caller":"KinoTime/main.go:49","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-02-13T01:14:53.655+0500","caller":"KinoTime/main.go:42","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-02-13T01:14:53.655+0500","caller":"KinoTime/main.go:56","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-02-13T01:15:34.214+0500","caller":"KinoTime/main.go:40","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-02-13T01:15:51.435+0500","caller":"KinoTime/main.go:49","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"ERROR","time":"2025-02-13T01:15:51.435+0500","caller":"KinoTime/main.go:42","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
+{"level":"INFO","time":"2025-02-13T01:15:51.435+0500","caller":"KinoTime/main.go:56","msg":"Сервер успешно остановлен."}
+{"level":"INFO","time":"2025-02-13T01:16:15.073+0500","caller":"KinoTime/main.go:40","msg":"Сервер запущен: http://localhost:8080/index"}
+{"level":"INFO","time":"2025-02-13T01:17:09.213+0500","caller":"email/email.go:104","msg":"Email sent successfully","To":"aakm25305@gmail.com"}
+{"level":"INFO","time":"2025-02-13T01:18:29.294+0500","caller":"KinoTime/main.go:49","msg":"Получен сигнал завершения, остановка сервера..."}
+{"level":"INFO","time":"2025-02-13T01:18:29.296+0500","caller":"KinoTime/main.go:56","msg":"Сервер успешно остановлен."}
+{"level":"ERROR","time":"2025-02-13T01:18:29.296+0500","caller":"KinoTime/main.go:42","msg":"Ошибка запуска сервера:","error":"http: Server closed"}
